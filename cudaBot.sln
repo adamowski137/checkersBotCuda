@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cudaBot", "cudaBot\cudaBot.vcxproj", "{239D3A2C-D1B6-4839-8FF1-ECA7C823BA11}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{239D3A2C-D1B6-4839-8FF1-ECA7C823BA11}.Debug|x64.ActiveCfg = Debug|x64
+		{239D3A2C-D1B6-4839-8FF1-ECA7C823BA11}.Debug|x64.Build.0 = Debug|x64
+		{239D3A2C-D1B6-4839-8FF1-ECA7C823BA11}.Release|x64.ActiveCfg = Release|x64
+		{239D3A2C-D1B6-4839-8FF1-ECA7C823BA11}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {50948BB7-5FF2-4273-B4FE-D75D3FE93E68}
+	EndGlobalSection
+EndGlobal
