@@ -14,15 +14,14 @@
     <ClInclude Include="Board.cuh" />
     <ClInclude Include="DeviceVector.cuh" />
     <ClInclude Include="Tree.cuh" />
-    <ClInclude Include="TreeCuda.cuh" />
     <ClInclude Include="Window.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="Board.cu" />
     <CudaCompile Include="kernel.cu" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{239D3A2C-D1B6-4839-8FF1-ECA7C823BA11}</ProjectGuid>

@@ -5,10 +5,10 @@ template <typename T>
 class DeviceVector 
 {
 private:
-	T array[32];
 	size_t count;
 public:
-	__device__ __host__ DeviceVector() : count{ 0 } {}
+	T array[32];
+	__device__ __host__ DeviceVector() : count{ 0 } {  }
 	__device__ __host__ size_t size()
 	{
 		return count;

@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 #include <bitset>
 #include <thread>
 #include <chrono>
@@ -12,8 +13,14 @@
 #include <condition_variable>
 #include <mutex>
 
-#define BLOCKS 100
-#define THREADS 256
+#define BLOCKS 32
+#define THREADS 768
+#define ITERATIONS 128
+
+#define HUMANPLAYER 'h'
+#define GPUPLAYER 'g'
+#define CPUPLAYER 'c'
+
 
 //#include "TreeCuda.cuh"
 
@@ -23,11 +30,11 @@ void runGame();
 
 int main(int argc, char** argv)
 {
-	std::cout << "Show window (y/n): ";
 	srand(time(NULL));
+
+	std::cout << "Show window (y/n): ";
 	char in;
-	//std::cin >> in;
-	in = 'n';
+	std::cin >> in;
 	if (in == 'y')
 	{
 		std::condition_variable cv{};
@@ -42,43 +49,36 @@ int main(int argc, char** argv)
 		t.join();
 	}
 
-
-
-
 	return 0;
 }
 
 void runGame()
 {
-	std::chrono::milliseconds maxTimeMove(1000);
 
 	const unsigned long long seed = 1232;
 	curandState* devStates;
 	cudaMalloc((void**)&devStates, THREADS * BLOCKS * sizeof(curandState));
 	initializeRandomStates << <BLOCKS, THREADS >> > (devStates, seed);
 
+	Board board = createBoard();
 
-	//Board board{64, 32768, 0, 0, WHITE};
-	Board board{};
+	float cWhite = 2.0f, cBlack = 2.0f;
+	std::cout << "wspolczynnik c dla bialego: ";
+	std::cin >> cWhite;
 
-	std::cout << board << std::endl;
+	std::cout << "wspolczynnik c dla czarnego: ";
+	std::cin >> cBlack;
 
-	int count = 0;
-	while (board.generatePositions().size() > 0 && count < 10)
+	bool winner, hasWinner;
+	while (generateMoves(board).size() > 0 && !isTerminal(board, &hasWinner, &winner))
 	{
-		count++;
-		float c = board.currentTurn == WHITE ? 2.5f : 2.0f;
+		float c = board.currentTurn == WHITE ? cWhite : cBlack;
 		Tree tree{ board, c };
 
-		std::chrono::milliseconds counting{};
-
-
-		//while (counting < maxTimeMove)
-		for (int i = 0; i < 16; i++)
+		for (int count = 0; count < ITERATIONS; count++)
 		{
 			TreeNode* p = tree.select();
 			auto nodes = tree.expand(p);
-			auto start = std::chrono::high_resolution_clock::now();
 			if (nodes.size() == 0)
 			{
 				continue;
@@ -87,77 +87,54 @@ void runGame()
 			int* whiteWins = new int[nodes.size()];
 			int* blackWins = new int[nodes.size()];
 			int* totalPlayed = new int[nodes.size()];
-			try
+			std::memset(whiteWins,   0,sizeof(int) * nodes.size());
+			std::memset(blackWins,   0,sizeof(int) * nodes.size());
+			std::memset(totalPlayed, 0,sizeof(int) * nodes.size());
+
+			tree.playoutCuda(nodes, whiteWins, blackWins, totalPlayed, devStates, THREADS, BLOCKS);
+
+			for (int i = 0; i < nodes.size(); i++)
 			{
-				if (board.currentTurn == WHITE)
-				{
-					tree.playoutCuda(nodes, whiteWins, blackWins, totalPlayed, devStates, THREADS);
-					for (int i = 0; i < nodes.size(); i++)
-					{
-						tree.backpropagation(nodes[i], whiteWins[i], blackWins[i], totalPlayed[i]);
-					}
-				}
-				else
-				{
-					/*int idx = rand() % nodes.size();
-					tree.playout(nodes[idx], &whiteWins[idx], &blackWins[idx], &totalPlayed[idx]);
-					tree.backpropagation(nodes[idx], whiteWins[idx], blackWins[idx], totalPlayed[idx]);*/
-					tree.playoutCuda(nodes, whiteWins, blackWins, totalPlayed, devStates, THREADS);
-					for (int i = 0; i < nodes.size(); i++)
-					{
-						tree.backpropagation(nodes[i], whiteWins[i], blackWins[i], totalPlayed[i]);
-					}
-				
-				}
-			}
-			catch (std::string s)
-			{
-				std::cout << s;
-				return;
+				TreeNode* pp = nodes[i];
+				tree.backpropagation(pp, whiteWins[i], blackWins[i], totalPlayed[i]);
 			}
 			delete whiteWins;
 			delete blackWins;
 			delete totalPlayed;
 
-			auto end = std::chrono::high_resolution_clock::now();
-			counting += std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
 		}
 		board = tree.getBestMove();
 		std::cout << board << std::endl;
 	}
-	std::cout << "Finished \n";
 	cudaFree(devStates);
 }
 
 void runGameWindow(Window& w, std::condition_variable& cv)
 {
-	std::chrono::milliseconds maxTimeMove(1000);
+	char whiteMode, blackMode;
+	std::cout << "White human/Gpu/Cpu: (h/g/c): ";
+	std::cin >> whiteMode;
+	std::cout << "Black human/Gpu/Cpu: (h/g/c): ";
+	std::cin >> blackMode;
 
 	const unsigned long long seed = 1234;
+	
 	curandState* devStates;
 	cudaMalloc((void**)&devStates, THREADS * BLOCKS * sizeof(curandState));
 	initializeRandomStates << <BLOCKS, THREADS >> > (devStates, seed);
-
-
-	//Board board{64, 32768, 0, 0, WHITE};
-	Board board{};
-
-	bool whitePlayer = true;
-	bool blackPlayer = false;
-
-	std::cout << board << std::endl;
+	
+	
+	Board board = createBoard();
 	w.updateBoard(board);
 
 	std::mutex m;
-	int count = 0;
-	while(board.generatePositions().size() > 0)
+	while(generateMoves(board).size() > 0)
 	{
-		count++;
-		if ((board.currentTurn == WHITE && whitePlayer) || (board.currentTurn == BLACK && blackPlayer))
+		if ((board.currentTurn == WHITE && whiteMode == HUMANPLAYER) || (board.currentTurn == BLACK && blackMode == HUMANPLAYER))
 		{
 			std::unique_lock<std::mutex> lock(m);
 			cv.wait(lock, [&]() {
-				return !(board == w.boardUpdated());
+				return !(isTheSameBoard(board, w.boardUpdated()));
 				}
 			);
 			board = w.boardUpdated();
@@ -170,31 +147,38 @@ void runGameWindow(Window& w, std::condition_variable& cv)
 
 
 		//while (counting < maxTimeMove)
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < ITERATIONS; i++)
 		{
 			TreeNode* p = tree.select();
-			auto nodes = tree.expand(p);
-			auto start = std::chrono::high_resolution_clock::now();
-			if (nodes.size() == 0)
+			bool hasWinner, winner;
+			if (isTerminal(p->position, &hasWinner, &winner) && hasWinner)
 			{
+				tree.backpropagation(p, (winner == WHITE && hasWinner) ? THREADS : 0, (winner == WHITE && hasWinner) ? 0 : THREADS, THREADS);
 				continue;
 			}
+			auto nodes = tree.expand(p);
+			auto start = std::chrono::high_resolution_clock::now();
 
 			int* whiteWins = new int[nodes.size()];
 			int* blackWins = new int[nodes.size()];
 			int* totalPlayed = new int[nodes.size()];
-			try 
+			std::memset(whiteWins,   0,sizeof(int) * nodes.size());
+			std::memset(blackWins,   0,sizeof(int) * nodes.size());
+			std::memset(totalPlayed, 0,sizeof(int) * nodes.size());
+
+			if ((board.currentTurn == WHITE && whiteMode == GPUPLAYER) || (board.currentTurn == BLACK && blackMode == GPUPLAYER))
 			{
-				tree.playoutCuda(nodes, whiteWins, blackWins, totalPlayed, devStates, THREADS);
+				tree.playoutCuda(nodes, whiteWins, blackWins, totalPlayed, devStates, THREADS, BLOCKS);
 			}
-			catch(std::string s)
+			else if ((board.currentTurn == WHITE && whiteMode == CPUPLAYER) || (board.currentTurn == BLACK && blackMode == CPUPLAYER))
 			{
-				std::cout << s;
-				return;
+				tree.playout(nodes, whiteWins, blackWins, totalPlayed);	
 			}
-			for (int i = 0; i < nodes.size(); i++)
+			
+			for (int j = 0; j < nodes.size(); j++)
 			{
-				tree.backpropagation(nodes[i], whiteWins[i], blackWins[i], totalPlayed[i]);
+				TreeNode* pp = nodes[j];
+				tree.backpropagation(pp, whiteWins[j], blackWins[j], totalPlayed[j]);
 			}
 			delete whiteWins;
 			delete blackWins;
@@ -205,7 +189,6 @@ void runGameWindow(Window& w, std::condition_variable& cv)
 		}
 		board = tree.getBestMove();
 		w.updateBoard(board);
-		std::cout << board << std::endl;
 	}
 	std::cout << "Finished \n";
 	cudaFree(devStates);

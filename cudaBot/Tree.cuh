@@ -4,8 +4,10 @@
 #include "device_launch_parameters.h"
 #include <cmath>
 #include "DeviceVector.cuh"
-#include <iostream>
+#include <fstream>
 #include <curand_kernel.h>
+
+
 
 __global__ void initializeRandomStates(curandState* state, unsigned long long seed)
 {
@@ -13,36 +15,43 @@ __global__ void initializeRandomStates(curandState* state, unsigned long long se
 	curand_init(seed, idx, 0, &state[idx]);
 }
 
-__global__ void threadWork(DeviceVector<Board> boards, int* whiteWins, int* blackWins, int* totalPlayed, curandState* state)
+__global__ void threadWork(Board* boards, int* whiteWins, int* blackWins, int* totalPlayed, curandState* state, int moves)
 {
-	Board position = boards[blockIdx.x];
-	bool winner;
-	int i = 0;
-	atomicAdd(&totalPlayed[blockIdx.x], 1);
+	int moveIdx = blockIdx.x;
+	Board position = boards[moveIdx];
+	bool winner, hasWinner;
+	int idx = threadIdx.x + blockDim.x * blockIdx.x;
+	//totalPlayed[blockIdx.x] +=  1;
 	// average game length is ~49 moves
-	while (!position.isTerminal(&winner) && i < 100)
+	while (!isTerminal(position, &hasWinner, &winner) )
 	{
 		//DeviceVector<Board> positions{};
-		DeviceVector<Board> positions = position.generatePositions();
-		if (positions.size() == 0)
+		DeviceVector<uint32_t> moves = generateMoves(position);
+		if (moves.size() == 0)
 		{
 			return;
 		}
-		curandState localState = state[blockIdx.y * blockIdx.x * 256 + threadIdx.x];
-		int randomIndex = curand(&localState) % positions.size();
-		state[threadIdx.x] = localState;
-		position = positions[randomIndex];
-		i++;
+		int randomIndex = (curand_uniform(state + idx) * (moves.size()));
+		if (randomIndex == moves.size())	randomIndex--;
+		position = applyMove(position, moves[randomIndex]);
 	}
+	if (!hasWinner)
+	{
+		return;
+	}
+
 	if (winner == WHITE)
 	{
-		atomicAdd(&whiteWins[blockIdx.x], 1);
-
+		atomicAdd(&whiteWins[moveIdx], 1);
+		atomicAdd(&totalPlayed[moveIdx], 1);
+		return;
 		//*whiteWins += 1;
 	}
 	if (winner == BLACK)
 	{
-		atomicAdd(&blackWins[blockIdx.x], 1);
+		atomicAdd(&totalPlayed[moveIdx], 1);
+		atomicAdd(&blackWins[moveIdx], 1);
+		return;
 
 		//*blackWins += 1;
 	}
@@ -64,7 +73,7 @@ class Tree
 public:
 
 	TreeNode* root;
-
+	std::ofstream out;
 
 	__host__ Tree(Board position, float c = 2) : c{c}
 	{
@@ -75,6 +84,7 @@ public:
 		root->totalPlayed = 0;
 		root->next = DeviceVector<TreeNode*>{};
 		root->prev = NULL;
+		out = std::ofstream{ "times.txt" };
 	}
 
 	__host__ ~Tree()
@@ -106,11 +116,10 @@ public:
 		int N = p->totalPlayed;
 		for (int i = 0; i < p->next.size(); i++)
 		{
-			int n = p->totalPlayed;
+			int n = p->next[i]->totalPlayed;
 			float c = 2.0f;
 			if (p->position.currentTurn == WHITE)
 			{
-
 				float value = (p->next[i]->whiteVictories / (float)(n)) + sqrtf(c * logf((float)N) / n);
 				if (maxValue < value)
 				{
@@ -133,21 +142,25 @@ public:
 
 	__host__ TreeNode* select()
 	{
+		auto startSelect = std::chrono::high_resolution_clock::now();
 		TreeNode* p = root;
 		while (!isLeaf(p))
 		{
 			p = selectNode(p);
 		}
+		auto endSelect = std::chrono::high_resolution_clock::now();
+		out << "select: " << std::chrono::duration_cast<std::chrono::microseconds>(endSelect - startSelect).count() << " microseconds" << std::endl;
 		return p;
 	}
 
 	__host__ DeviceVector<TreeNode*> expand(TreeNode* p)
 	{
-		DeviceVector<Board> postions = p->position.generatePositions();
-		for (int i = 0; i < postions.size(); i++)
+		DeviceVector<uint32_t> moves = generateMoves(p->position);
+
+		for (int i = 0; i < moves.size(); i++)
 		{
 			TreeNode* t = new TreeNode;
-			t->position = postions[i];
+			t->position = applyMove(p->position, moves[i]);
 			t->whiteVictories = 0;
 			t->blackVictories = 0;
 			t->totalPlayed = 0;
@@ -159,40 +172,49 @@ public:
 		return p->next;
 	}
 
-	__host__ int playout(TreeNode* p, int* whiteWins, int* blackWins, int* totalPlayed)
+	__host__ void playout(DeviceVector<TreeNode*>& nodes, int* whiteWins, int* blackWins, int* totalPlayed)
 	{
-		*totalPlayed += 1;
-		Board position = p->position;
-		bool winner;
-		int i = 0;
-		while (!position.isTerminal(&winner) && i < 100)
+		for (int i = 0; i < nodes.size(); i++)
 		{
-			auto positions = position.generatePositions();
-			if (positions.size() == 0)
+			Board position = nodes[i]->position;
+			bool winner, hasWinner;
+			while (isTerminal(position, &hasWinner, &winner))
 			{
-				return 0;
+				auto positions = generateMoves(position);
+				if (positions.size() == 0)
+				{
+					break;
+				}
+				position = applyMove(position, positions[rand() % positions.size()]);
 			}
-			position = positions[rand() % positions.size()];
-			i++;
-		}
-		if (i == 100)
-		{
-			return 0;
-		}
-		if (winner == WHITE)
-		{
-			*whiteWins += 1;
-		}
-		else if (winner == BLACK)
-		{
-			*blackWins += 1;
+			if (!hasWinner)
+			{
+				return;
+			}
+			if (winner == WHITE)
+			{
+				totalPlayed[i] += 1;
+				whiteWins[i] += 1;
+			}
+			else if (winner == BLACK)
+			{
+				totalPlayed[i] += 1;
+				blackWins[i] += 1;
+			}
 		}
 
-		return winner == WHITE ? 1 : -1;
 	}
 
-	__host__ int playoutCuda(DeviceVector<TreeNode*>& nodes, int* whiteWins, int* blackWins, int* totalPlayed, curandState* devStates, int threads)
+	__host__ int playoutCuda(DeviceVector<TreeNode*>& nodes, int* whiteWins, int* blackWins, int* totalPlayed, curandState* devStates, int threads, int blocks)
 	{
+		int* tmpWhiteWins, *tmpBlackWins, *tmpTotalPlayed;
+		tmpWhiteWins = new int[blocks];
+		tmpBlackWins = new int[blocks];
+		tmpTotalPlayed = new int[blocks];
+
+		std::memset(tmpWhiteWins, 0, blocks * sizeof(int));
+		std::memset(tmpBlackWins, 0, blocks * sizeof(int));
+		std::memset(tmpTotalPlayed, 0, blocks * sizeof(int));
 		DeviceVector<Board> boards;
 		for (int i = 0; i < nodes.size(); i++) 
 		{
@@ -206,20 +228,25 @@ public:
 		}
 
 		int* dev_whiteWins, * dev_blackWins, * dev_totalPlayed;
+		Board* dev_boards;
+		auto startMalloc = std::chrono::high_resolution_clock::now();
+		cudaMalloc((void**)&dev_whiteWins, blocks * sizeof(int));
+		cudaMalloc((void**)&dev_blackWins, blocks * sizeof(int));
+		cudaMalloc((void**)&dev_totalPlayed, blocks * sizeof(int));
+		cudaMalloc((void**)&dev_boards, blocks * sizeof(Board));
 
-		cudaMalloc((void**)&dev_whiteWins, boards.size() * sizeof(int));
-		cudaMalloc((void**)&dev_blackWins, boards.size() * sizeof(int));
-		cudaMalloc((void**)&dev_totalPlayed, boards.size() * sizeof(int));
 
-		cudaMemset(dev_whiteWins, 0, boards.size() * sizeof(int));
-		cudaMemset(dev_blackWins, 0, boards.size() * sizeof(int));
-		cudaMemset(dev_totalPlayed, 0, boards.size() * sizeof(int));
+		cudaMemset(dev_whiteWins, 0, blocks * sizeof(int));
+		cudaMemset(dev_blackWins, 0, blocks * sizeof(int));
+		cudaMemset(dev_totalPlayed, 0, blocks * sizeof(int));
+		cudaMemcpy(dev_boards, boards.array, boards.size() * sizeof(Board), cudaMemcpyHostToDevice);
+		auto endMalloc = std::chrono::high_resolution_clock::now();
+		out << "cuda malloc + memcpy: " << std::chrono::duration_cast<std::chrono::microseconds>(endMalloc - startMalloc).count() << " microseconds" << std::endl;
 
-		dim3 blocks;
-		blocks.x = boards.size();
-		blocks.y = 10;
 
-		threadWork << <blocks, threads>> > (boards, dev_whiteWins, dev_blackWins, dev_totalPlayed, devStates);
+		auto startExec = std::chrono::high_resolution_clock::now();
+		threadWork << <blocks, threads >> > (dev_boards, dev_whiteWins, dev_blackWins, dev_totalPlayed, devStates, boards.size());
+
 
 		cudaStatus = cudaGetLastError();
 		if (cudaStatus != cudaSuccess) {
@@ -230,27 +257,53 @@ public:
 		if (cudaStatus != cudaSuccess) {
 			throw("cudaDeviceSynchronize returned error code %d after launching addKernel!\n");
 		}
+		auto endExec = std::chrono::high_resolution_clock::now();
+		out << "cuda exec: " << std::chrono::duration_cast<std::chrono::microseconds>(endExec - startExec).count() << " microseconds" << std::endl;
+		auto startFree = std::chrono::high_resolution_clock::now();
 
-		cudaStatus = cudaMemcpy(whiteWins, dev_whiteWins, boards.size() * sizeof(int), cudaMemcpyDeviceToHost);
-		cudaStatus = cudaMemcpy(blackWins, dev_blackWins, boards.size() * sizeof(int), cudaMemcpyDeviceToHost);
-		cudaStatus = cudaMemcpy(totalPlayed, dev_totalPlayed,boards.size() *  sizeof(int), cudaMemcpyDeviceToHost);
-
+		cudaStatus = cudaMemcpy(tmpWhiteWins, dev_whiteWins, blocks * sizeof(int), cudaMemcpyDeviceToHost);
+		cudaStatus = cudaMemcpy(tmpBlackWins, dev_blackWins, blocks * sizeof(int), cudaMemcpyDeviceToHost);
+		cudaStatus = cudaMemcpy(tmpTotalPlayed, dev_totalPlayed, blocks *  sizeof(int), cudaMemcpyDeviceToHost);
 
 		cudaFree(dev_whiteWins);
 		cudaFree(dev_blackWins);
 		cudaFree(dev_totalPlayed);
+		cudaFree(dev_boards);
+
+		auto endFree = std::chrono::high_resolution_clock::now();
+		out << "cuda cpy + free: " << std::chrono::duration_cast<std::chrono::microseconds>(endFree - startFree).count() << " microseconds" << std::endl;
+
+		for (int i = 0; i < blocks; i++)
+		{
+			int idx = i % boards.size();
+			whiteWins[idx] += tmpWhiteWins[i];
+			blackWins[idx] += tmpBlackWins[i];
+			totalPlayed[idx] += tmpTotalPlayed[i];
+		}
+
+		delete tmpWhiteWins;
+		delete tmpBlackWins;
+		delete tmpTotalPlayed;
+
 		return 1;
 	}
 
-	__host__ void backpropagation(TreeNode* p, int whiteWins, int blackWins, int totalPlayed)
+	__host__ void backpropagation(TreeNode* last, int whiteWins, int blackWins, int totalPlayed)
 	{
+		auto startBackpropagation = std::chrono::high_resolution_clock::now();
+
+		TreeNode* p = last;
 		while (p != NULL)
 		{
-			p->whiteVictories += whiteWins;
-			p->blackVictories += blackWins;
-			p->totalPlayed += totalPlayed;
-			p = p->prev;
+			(p)->whiteVictories += whiteWins;
+			(p)->blackVictories += blackWins;
+			(p)->totalPlayed += totalPlayed;
+			p = ((p)->prev);
 		}
+
+		auto endBackpropagation = std::chrono::high_resolution_clock::now();
+		out << "backpropagation: " << std::chrono::duration_cast<std::chrono::microseconds>(endBackpropagation - startBackpropagation).count() << " microseconds" << std::endl;
+
 	}
 
 	__host__ Board getBestMove()
@@ -259,11 +312,6 @@ public:
 		int maxi = 0;
 		for (int i = 0; i < root->next.size(); i++) {
 			
-			bool winner;
-			if (root->next[i]->position.isTerminal(&winner))
-			{
-				return root->next[i]->position;
-			}
 			int n = root->next[i]->totalPlayed;
 			if (max < n)
 			{
@@ -271,7 +319,7 @@ public:
 				maxi = i;
 			}
 		}
-		std::cout << (root->next[maxi]->totalPlayed) << std::endl;
+		std::cout << "move found" << std::endl;
 		return root->next[maxi]->position;
 	}
 private:

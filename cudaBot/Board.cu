@@ -1,90 +1,77 @@
 #pragma once
 
+#include <cuda_runtime.h>
+#include "DeviceVector.cuh"
+#include <iostream>
 #include "Board.cuh"
 
 
-__device__ __host__ Board::Board()
+__device__ __host__ Board createBoard()
 {
-	whitePawns = 0x55AA55;
-	blackPawns = 0xAA55AA0000000000;
-	whiteQueens = 0;
-	blackQueens = 0;
-	currentTurn = WHITE;
+	Board b;
+	b.whitePawns = 0xfff;
+	b.blackPawns = 0xfff00000;
+	b.whiteQueens = 0;
+	b.blackQueens = 0;
+	b.currentTurn = WHITE;
+	b.lastBeat = 0;
+	return b;
 }
 
-__device__ __host__ Board::Board(uint64_t whitePawns, uint64_t blackPawns, uint64_t whiteQueens, uint64_t blackQueens, bool currentTurn)
+__device__ __host__ Board createBoard(uint32_t whitePawns, uint32_t blackPawns, uint32_t whiteQueens, uint32_t blackQueens, bool currentTurn, uint8_t lastBeat)
 {
-	this->whitePawns = whitePawns;
-	this->blackPawns = blackPawns;
-	this->whiteQueens = whiteQueens;
-	this->blackQueens = blackQueens;
-	this->currentTurn = currentTurn;
+	Board b;
+	b.whitePawns = whitePawns;
+	b.blackPawns = blackPawns;
+	b.whiteQueens = whiteQueens;
+	b.blackQueens = blackQueens;
+	b.currentTurn = currentTurn;
+	b.lastBeat = lastBeat;
+	return b;
 }
 
-
-__device__ __host__ DeviceVector<Board> Board::generatePositions()
+__device__ __host__ bool isTerminal(Board board, bool* hasWinner, bool* winner)
 {
-	DeviceVector<Board> positions{};
-	uint64_t mask = 1;
-	for (int i = 0; i < 64; i++)
+	if (board.lastBeat >= MAXMOVESNOBEATS)
 	{
-		generateFromFigure(mask, positions);
-		mask = (mask << 1);
+		*hasWinner = false;
+		return true;
 	}
-
-	return positions;
-}
-
-
-__device__ __host__ bool Board::isTerminal(bool* winner)
-{
-	if ((whitePawns | whiteQueens) == 0)
+	if ((board.whitePawns | board.whiteQueens) == 0)
 	{
+		*hasWinner = true;
 		*winner = BLACK;
 		return true;
 	}
 
-	if ((blackPawns | blackQueens) == 0)
+	if ((board.blackPawns | board.blackQueens) == 0)
 	{
+		*hasWinner = true;
 		*winner = WHITE;
 		return true;
 	}
 	return false;
 }
 
-__device__ __host__ void Board::promoteToQueen(uint64_t& pawns, uint64_t& queens, uint64_t mask)
+__device__ __host__ void generateQueenMoves(uint32_t mask, DeviceVector<uint32_t>& positions, Board b)
 {
-	if (currentTurn == WHITE)
-	{
-		if ((mask & lowerBorder) > 0)
-		{
-			pawns = (pawns & (~mask));
-			queens = (queens | mask);
-		}
-	}
-	if (currentTurn == BLACK)
-	{
-		if ((mask & upperBorder) > 0)
-		{
-			pawns = (pawns & (~mask));
-			queens = (queens | mask);
-		}
-	}
-}
+	uint32_t whitePawns = b.whitePawns;
+	uint32_t blackPawns = b.blackPawns;
+	uint32_t whiteQueens = b.whiteQueens;
+	uint32_t blackQueens = b.blackQueens;
+	bool currentTurn = b.currentTurn;
 
-__device__ __host__ void Board::generateQueenMoves(uint64_t mask, DeviceVector<Board>& positions)
-{
-	uint64_t allFigures = (whitePawns | blackPawns | whiteQueens | blackQueens);
-	uint64_t whiteFigures = (whitePawns | whiteQueens);
-	uint64_t blackFigures = (blackPawns | blackQueens);
+	uint32_t allFigures = (whitePawns | blackPawns | whiteQueens | blackQueens);
+	uint32_t whiteFigures = (whitePawns | whiteQueens);
+	uint32_t blackFigures = (blackPawns | blackQueens);
 
 
 	if (currentTurn == WHITE)
 	{
 		if ((mask & leftBorder) == 0)
 		{
-			uint64_t leftUp = (mask >> 9);
-			uint64_t current = mask;
+			uint32_t leftUp = SHIFTUP(mask, 4);
+			uint32_t current = mask;
 
 			while (leftUp > 0 && (leftUp & whiteFigures) == 0 && (current & leftBorder) == 0)
 			{
@@ -92,30 +79,24 @@ __device__ __host__ void Board::generateQueenMoves(uint64_t mask, DeviceVector<B
 				{
 					if ((leftUp & blackFigures) > 0 && (leftUp & leftBorder) == 0)
 					{
-						uint64_t leftBeat = (leftUp >> 9);
+						uint32_t leftBeat = SHIFTUP(leftUp, 4);
 						if (leftBeat > 0 && (leftBeat & allFigures) == 0)
 						{
-							uint64_t newWhiteQueens = ((whiteQueens | leftBeat) & (~mask));
-							uint64_t newBlackPawns = ((blackPawns) & (~leftUp));
-							uint64_t newBlackQueens = ((blackQueens) & (~leftUp));
-							uint64_t newWhitePawns = whitePawns;
-
-							positions.push_back(Board(newWhitePawns, newBlackPawns, newWhiteQueens, newBlackQueens, !currentTurn));
+							positions.push_back((mask | leftUp | leftBeat));
 						}
 					}
 					break;
 				}
 
-				uint64_t newWhiteQueens = ((whiteQueens | leftUp) & (~mask));
-				positions.push_back(Board(whitePawns, blackPawns, newWhiteQueens, blackQueens, !currentTurn));
+				positions.push_back((mask | leftUp));
 				current = leftUp;
-				leftUp = (leftUp >> 9);
+				leftUp = SHIFTUP(leftUp, 4);
 			}
 		}
 		if ((mask & rightBorder) == 0)
 		{
-			uint64_t rightUp = (mask >> 7);
-			uint64_t current = mask;
+			uint32_t rightUp = SHIFTUP(mask, 3);
+			uint32_t current = mask;
 
 			while (rightUp > 0 && (rightUp & whiteFigures) == 0 && (current & rightBorder) == 0)
 			{
@@ -123,31 +104,25 @@ __device__ __host__ void Board::generateQueenMoves(uint64_t mask, DeviceVector<B
 				{
 					if ((rightUp & blackFigures) > 0 && (rightUp & rightBorder) == 0)
 					{
-						uint64_t rightBeat = (rightUp >> 7);
+						uint32_t rightBeat = SHIFTUP(rightUp, 3);
 						if (rightBeat > 0 && (rightBeat & allFigures) == 0)
 						{
-							uint64_t newWhiteQueens = ((whiteQueens | rightBeat) & (~mask));
-							uint64_t newBlackPawns = ((blackPawns) & (~rightUp));
-							uint64_t newBlackQueens = ((blackQueens) & (~rightUp));
-							uint64_t newWhitePawns = whitePawns;
-
-							positions.push_back(Board(newWhitePawns, newBlackPawns, newWhiteQueens, newBlackQueens, !currentTurn));
+							positions.push_back((mask | rightUp | rightBeat));
 						}
 					}
 					break;
 				}
 
-				uint64_t newWhiteQueens = ((whiteQueens | rightUp) & (~mask));
-				positions.push_back(Board(whitePawns, blackPawns, newWhiteQueens, blackQueens, !currentTurn));
+				positions.push_back((mask | rightUp));
 
 				current = rightUp;
-				rightUp = (rightUp >> 7);
+				rightUp = SHIFTUP(rightUp, 3);
 			}
 		}
 		if ((mask & leftBorder) == 0)
 		{
-			uint64_t leftDown = (mask << 7);
-			uint64_t current = mask;
+			uint32_t leftDown = SHIFTDOWN(mask, 3);
+			uint32_t current = mask;
 
 			while (leftDown > 0 && (leftDown & whiteFigures) == 0 && (current & leftBorder) == 0)
 			{
@@ -155,59 +130,43 @@ __device__ __host__ void Board::generateQueenMoves(uint64_t mask, DeviceVector<B
 				{
 					if ((leftDown & blackFigures) > 0 && (leftDown & leftBorder) == 0)
 					{
-						uint64_t leftDownBeat = (leftDown << 7);
+						uint32_t leftDownBeat = SHIFTDOWN(leftDown, 3);
 						if (leftDownBeat > 0 && (leftDownBeat & allFigures) == 0)
 						{
-							uint64_t newWhiteQueens = ((whiteQueens | leftDownBeat) & (~mask));
-							uint64_t newBlackPawns = ((blackPawns) & (~leftDown));
-							uint64_t newBlackQueens = ((blackQueens) & (~leftDown));
-							uint64_t newWhitePawns = whitePawns;
-
-							positions.push_back(Board(newWhitePawns, newBlackPawns, newWhiteQueens, newBlackQueens, !currentTurn));
-
+							positions.push_back((mask | leftDown | leftDownBeat));
 						}
 					}
 					break;
 				}
 
-
-				uint64_t newWhiteQueens = ((whiteQueens | leftDown) & (~mask));
-				positions.push_back(Board(whitePawns, blackPawns, newWhiteQueens, blackQueens, !currentTurn));
+				positions.push_back((mask | leftDown));
 				current = leftDown;
-				leftDown = (leftDown << 7);
+				leftDown = SHIFTDOWN(leftDown, 3);
 			}
 		}
 
 		if ((mask & rightBorder) == 0)
 		{
-			uint64_t current = mask;
-			uint64_t rightDown = (mask << 9);
+			uint32_t current = mask;
+			uint32_t rightDown = SHIFTDOWN(mask, 4);
 			while (rightDown > 0 && (rightDown & whiteFigures) == 0 && (current & rightBorder) == 0)
 			{
 				if ((rightDown & allFigures) > 0)
 				{
 					if ((rightDown & blackFigures) > 0 && (rightDown & rightBorder) == 0)
 					{
-						uint64_t rightDownBeat = (rightDown << 9);
+						uint32_t rightDownBeat = SHIFTDOWN(rightDown, 4);
 						if (rightDownBeat > 0 && (rightDownBeat & allFigures) == 0)
 						{
-							uint64_t newWhiteQueens = ((whiteQueens | rightDownBeat) & (~mask));
-							uint64_t newBlackPawns = ((blackPawns) & (~rightDown));
-							uint64_t newBlackQueens = ((blackQueens) & (~rightDown));
-							uint64_t newWhitePawns = whitePawns;
-
-							promoteToQueen(newWhitePawns, newWhiteQueens, rightDownBeat);
-
-							positions.push_back(Board(newWhitePawns, newBlackPawns, newWhiteQueens, newBlackQueens, !currentTurn));
+							positions.push_back((mask | rightDown | rightDownBeat));
 						}
 					}
 					break;
 				}
 
-				uint64_t newWhiteQueens = ((whiteQueens | rightDown) & (~mask));
-				positions.push_back(Board(whitePawns, blackPawns, newWhiteQueens, blackQueens, !currentTurn));
+				positions.push_back((mask | rightDown));
 				current = rightDown;
-				rightDown = (rightDown << 9);
+				rightDown = SHIFTDOWN(rightDown, 4);
 			}
 		}
 	}
@@ -215,8 +174,8 @@ __device__ __host__ void Board::generateQueenMoves(uint64_t mask, DeviceVector<B
 	{
 		if ((mask & leftBorder) == 0)
 		{
-			uint64_t leftUp = (mask >> 9);
-			uint64_t current = mask;
+			uint32_t leftUp = SHIFTUP(mask, 4);
+			uint32_t current = mask;
 
 			while (leftUp > 0 && (leftUp & blackFigures) == 0 && (current & leftBorder) == 0)
 			{
@@ -224,32 +183,26 @@ __device__ __host__ void Board::generateQueenMoves(uint64_t mask, DeviceVector<B
 				{
 					if ((leftUp & whiteFigures) > 0 && (leftUp & leftBorder) == 0)
 					{
-						uint64_t leftBeat = (leftUp >> 9);
+						uint32_t leftBeat = SHIFTUP(leftUp, 4);
 						if (leftBeat > 0 && (leftBeat & allFigures) == 0)
 						{
-							uint64_t newBlackQueens = ((blackQueens | leftBeat) & (~mask));
-							uint64_t newWhitePawns = ((whitePawns) & (~leftUp));
-							uint64_t newWhiteQueens = ((whiteQueens) & (~leftUp));
-							uint64_t newBlackPawns = blackPawns;
-
-							positions.push_back(Board(newWhitePawns, newBlackPawns, newWhiteQueens, newBlackQueens, !currentTurn));
+							positions.push_back((mask | leftUp | leftBeat));
 						}
 					}
 					break;
 				}
-
-				uint64_t newBlackQueens = ((blackQueens | leftUp) & (~mask));
-				positions.push_back(Board(whitePawns, blackPawns, whiteQueens, newBlackQueens, !currentTurn));
+				
+				positions.push_back((mask | leftUp));
 				current = leftUp;
 
-				leftUp = (leftUp >> 9);
+				leftUp = SHIFTUP(leftUp, 4);
 			}
 		}
 
 		if ((mask & rightBorder) == 0)
 		{
-			uint64_t rightUp = (mask >> 7);
-			uint64_t current = mask;
+			uint32_t rightUp = SHIFTUP(mask, 3);
+			uint32_t current = mask;
 
 			while (rightUp > 0 && (rightUp & blackFigures) == 0 && (current & rightBorder) == 0)
 			{
@@ -257,32 +210,25 @@ __device__ __host__ void Board::generateQueenMoves(uint64_t mask, DeviceVector<B
 				{
 					if ((rightUp & whiteFigures) > 0 && (rightUp & rightBorder) == 0)
 					{
-						uint64_t rightBeat = (rightUp >> 7);
+						uint32_t rightBeat = SHIFTUP(rightUp, 3);
 						if (rightBeat > 0 && (rightBeat & allFigures) == 0)
 						{
-							uint64_t newBlackQueens = ((blackQueens | rightBeat) & (~mask));
-							uint64_t newWhitePawns = ((whitePawns) & (~rightUp));
-							uint64_t newWhiteQueens = ((whiteQueens) & (~rightUp));
-							uint64_t newBlackPawns = blackPawns;
-
-							positions.push_back(Board(newWhitePawns, newBlackPawns, newWhiteQueens, newBlackQueens, !currentTurn));
-
+							positions.push_back((mask | rightUp | rightBeat));
 						}
 					}
 					break;
 				}
 
-				uint64_t newBlackQueens = ((blackQueens | rightUp) & (~mask));
-				positions.push_back(Board(whitePawns, blackPawns, whiteQueens, newBlackQueens, !currentTurn));
+				positions.push_back((mask | rightUp));
 				current = rightUp;
-				rightUp = (rightUp >> 7);
+				rightUp = SHIFTUP(rightUp, 3);
 			}
 		}
 
 		if ((mask & leftBorder) == 0)
 		{
-			uint64_t leftDown = (mask << 7);
-			uint64_t current = mask;
+			uint32_t leftDown = SHIFTDOWN(mask, 3);
+			uint32_t current = mask;
 
 			while (leftDown > 0 && (leftDown & blackFigures) == 0 && (current & leftBorder) == 0)
 			{
@@ -290,33 +236,26 @@ __device__ __host__ void Board::generateQueenMoves(uint64_t mask, DeviceVector<B
 				{
 					if ((leftDown & whiteFigures) > 0 && (leftDown & leftBorder) == 0)
 					{
-						uint64_t leftDownBeat = (leftDown << 7);
+						uint32_t leftDownBeat = SHIFTDOWN(leftDown, 3);
 						if (leftDownBeat > 0 && (leftDownBeat & allFigures) == 0)
 						{
-							uint64_t newBlackQueens = ((blackQueens | leftDownBeat) & (~mask));
-							uint64_t newWhitePawns = ((whitePawns) & (~leftDown));
-							uint64_t newWhiteQueens = ((whiteQueens) & (~leftDown));
-							uint64_t newBlackPawns = blackPawns;
-
-							positions.push_back(Board(newWhitePawns, newBlackPawns, newWhiteQueens, newBlackQueens, !currentTurn));
-
+							positions.push_back((mask | leftDown | leftDownBeat));
 						}
 					}
 					break;
 				}
 
-				uint64_t newBlackQueens = ((blackQueens | leftDown) & (~mask));
-				positions.push_back(Board(whitePawns, blackPawns, whiteQueens, newBlackQueens, !currentTurn));
+				positions.push_back((mask | leftDown));
 				current = leftDown;
 
-				leftDown = (leftDown << 7);
+				leftDown = SHIFTDOWN(leftDown, 3);
 			}
 		}
 
 		if ((mask & rightBorder) == 0)
 		{
-			uint64_t current = mask;
-			uint64_t rightDown = (mask << 9);
+			uint32_t current = mask;
+			uint32_t rightDown = SHIFTDOWN(mask, 4);
 			while (rightDown > 0 && (rightDown & blackFigures) == 0 && (current & rightBorder) == 0)
 			{
 				if ((rightDown & allFigures) > 0)
@@ -324,88 +263,63 @@ __device__ __host__ void Board::generateQueenMoves(uint64_t mask, DeviceVector<B
 
 					if ((rightDown & whiteFigures) > 0 && (rightDown & rightBorder) == 0)
 					{
-						uint64_t rightDownBeat = (rightDown << 9);
+						uint32_t rightDownBeat = SHIFTDOWN(rightDown, 4);
 						if (rightDownBeat > 0 && (rightDownBeat & allFigures) == 0)
 						{
-							uint64_t newBlackQueens = ((blackQueens | rightDownBeat) & (~mask));
-							uint64_t newWhitePawns = ((whitePawns) & (~rightDown));
-							uint64_t newWhiteQueens = ((whiteQueens) & (~rightDown));
-							uint64_t newBlackPawns = blackPawns;
-
-							positions.push_back(Board(newWhitePawns, newBlackPawns, newWhiteQueens, newBlackQueens, !currentTurn));
+							positions.push_back((mask | rightDown | rightDownBeat));
 						}
 					}
 					break;
 				}
 
-
-				uint64_t newBlackQueens = ((blackQueens | rightDown) & (~mask));
-				positions.push_back(Board(whitePawns, blackPawns, whiteQueens, newBlackQueens, !currentTurn));
+				positions.push_back((mask | rightDown));
 				current = rightDown;
-				rightDown = (rightDown << 9);
+				rightDown = SHIFTDOWN(rightDown, 4);
 			}
 		}
 	}
 }
-__device__ __host__ Board& Board::operator=(const Board& other) {
-	if (this != &other) {
-		// Copy the data members from 'other' to 'this'
-		this->whitePawns = other.whitePawns;
-		this->whiteQueens = other.whiteQueens;
-		this->blackPawns = other.blackPawns;
-		this->blackQueens = other.blackQueens;
-		this->currentTurn = other.currentTurn;
-	}
-	return *this;
-}
 
-__device__ __host__ DeviceVector<Board> Board::generateFromFigure(uint64_t mask, DeviceVector<Board>& positions)
+__device__ __host__ void generateFromFigure(uint32_t mask, DeviceVector<uint32_t>& positions, Board b)
 {
-	uint64_t allFigures = (whitePawns | blackPawns | whiteQueens | blackQueens);
-	uint64_t whiteFigures = (whitePawns | whiteQueens);
-	uint64_t blackFigures = (blackPawns | blackQueens);
+	uint32_t whitePawns = b.whitePawns;
+	uint32_t blackPawns = b.blackPawns;
+	uint32_t whiteQueens = b.whiteQueens;
+	uint32_t blackQueens = b.blackQueens;
+	bool currentTurn = b.currentTurn;
 
+	uint32_t allFigures = (whitePawns | blackPawns | whiteQueens | blackQueens);
+	uint32_t whiteFigures = (whitePawns | whiteQueens);
+	uint32_t blackFigures = (blackPawns | blackQueens);
 
-	
+	generatePawnBeatMoves(mask, positions, b);
 
-	generatePawnBeatMoves(mask, positions);
-	
 	if (currentTurn == WHITE)
 	{
 		if (mask & whiteQueens)
 		{
-			generateQueenMoves(mask, positions);
-			return positions;
+			generateQueenMoves(mask, positions, b);
 		}
 		if ((mask & whitePawns) > 0)
 		{
-			uint64_t leftMove = (mask << 7);
+			uint32_t leftMove = SHIFTDOWN(mask, 3);
 
 			if (leftMove > 0 && (mask & leftBorder) == 0)
 			{
 				if ((leftMove & allFigures) == 0)
 				{
-					uint64_t newWhitePawns = ((whitePawns | leftMove) & (~mask));
-					uint64_t newWhiteQueens = whiteQueens;
-
-					promoteToQueen(newWhitePawns, newWhiteQueens, leftMove);
-
-					positions.push_back(Board(newWhitePawns, blackPawns, newWhiteQueens, blackQueens, !currentTurn));
+					positions.push_back((mask | leftMove));
 				}
 
 			}
-			uint64_t rightMove = (mask << 9);
+			uint32_t rightMove = SHIFTDOWN(mask, 4);
 
 			if (rightMove > 0 && (mask & rightBorder) == 0)
 			{
 				if ((rightMove & allFigures) == 0)
 				{
-					uint64_t newWhitePawns = ((whitePawns | rightMove) & (~mask));
-					uint64_t newWhiteQueens = whiteQueens;
 
-					promoteToQueen(newWhitePawns, newWhiteQueens, rightMove);
-
-					positions.push_back(Board(newWhitePawns, blackPawns, newWhiteQueens, blackQueens, !currentTurn));
+					positions.push_back((mask | rightMove));
 				}
 			}
 		}
@@ -414,62 +328,47 @@ __device__ __host__ DeviceVector<Board> Board::generateFromFigure(uint64_t mask,
 	{
 		if (mask & blackQueens)
 		{
-			generateQueenMoves(mask, positions);
-			return positions;
+			generateQueenMoves(mask, positions, b);
 		}
 		if ((mask & blackPawns) > 0)
 		{
-			uint64_t leftMove = (mask >> 9);
+			uint32_t leftMove = SHIFTUP(mask, 4);
 
 			if (leftMove > 0 && (mask & leftBorder) == 0)
 			{
 				if ((leftMove & allFigures) == 0)
 				{
-					uint64_t newBlackPawns = ((blackPawns | leftMove) & (~mask));
-					uint64_t newBlackQueens = blackQueens;
-
-					promoteToQueen(newBlackPawns, newBlackQueens, leftMove);
-
-					positions.push_back(Board(whitePawns, newBlackPawns, whiteQueens, newBlackQueens, !currentTurn));
+					positions.push_back((mask | leftMove));
 				}
 
 			}
-			uint64_t rightMove = (mask >> 7);
+			uint32_t rightMove = SHIFTUP(mask, 3);
 
 			if (rightMove > 0 && (mask & rightBorder) == 0)
 			{
 				if ((rightMove & allFigures) == 0)
 				{
-					uint64_t newBlackPawns = ((blackPawns | rightMove) & (~mask));
-					uint64_t newBlackQueens = blackQueens;
-
-					promoteToQueen(newBlackPawns, newBlackQueens, rightMove);
-
-					positions.push_back(Board(whitePawns, newBlackPawns, whiteQueens, newBlackQueens, !currentTurn));
+					positions.push_back((mask | rightMove));
 				}
 			}
 		}
 	}
-
-
-
-	return positions;
 }
 
-__device__ __host__ bool Board::operator==(const Board& other)
+__device__ __host__ void generatePawnBeatMoves(uint32_t mask, DeviceVector<uint32_t>& positions, Board b)
 {
-	return blackPawns == other.blackPawns && whitePawns == other.whitePawns && blackQueens == other.blackQueens && whiteQueens == other.whiteQueens;
-}
-
-void Board::generatePawnBeatMoves(uint64_t mask, DeviceVector<Board>& positions)
-{
-	uint64_t allFigures = (whitePawns | blackPawns | whiteQueens | blackQueens);
-	uint64_t whiteFigures = (whitePawns | whiteQueens);
-	uint64_t blackFigures = (blackPawns | blackQueens);
+	uint32_t whitePawns = b.whitePawns;
+	uint32_t blackPawns = b.blackPawns;
+	uint32_t whiteQueens = b.whiteQueens;
+	uint32_t blackQueens = b.blackQueens;
+	bool currentTurn = b.currentTurn;
+	uint32_t allFigures = (whitePawns | blackPawns | whiteQueens | blackQueens);
+	uint32_t whiteFigures = (whitePawns | whiteQueens);
+	uint32_t blackFigures = (blackPawns | blackQueens);
 
 	//left down beat
-	uint64_t leftDownMove = (mask << 7);
-	uint64_t leftDownBeat = (leftDownMove << 7);
+	uint32_t leftDownMove = SHIFTDOWN(mask, 3);
+	uint32_t leftDownBeat = SHIFTDOWN(leftDownMove, 3);
 
 	if (currentTurn == WHITE)
 	{
@@ -481,14 +380,7 @@ void Board::generatePawnBeatMoves(uint64_t mask, DeviceVector<Board>& positions)
 			(leftDownMove & blackFigures) > 0
 			)
 		{
-			uint64_t newWhitePawns = ((whitePawns | leftDownBeat) & (~mask));
-			uint64_t newBlackPawns = ((blackPawns) & (~leftDownMove));
-			uint64_t newBlackQueens = ((blackQueens) & (~leftDownMove));
-			uint64_t newWhiteQueens = whiteQueens;
-
-			promoteToQueen(newWhitePawns, newWhiteQueens, leftDownBeat);
-
-			positions.push_back(Board(newWhitePawns, newBlackPawns, newWhiteQueens, newBlackQueens, !currentTurn));
+			positions.push_back((mask | leftDownMove | leftDownBeat));
 		}
 	}
 	if (currentTurn == BLACK)
@@ -501,21 +393,14 @@ void Board::generatePawnBeatMoves(uint64_t mask, DeviceVector<Board>& positions)
 			(leftDownMove & whiteFigures) > 0
 			)
 		{
-			uint64_t newBlackPawns = ((blackPawns | leftDownBeat) & (~mask));
-			uint64_t newWhitePawns = ((whitePawns) & (~leftDownMove));
-			uint64_t newWhiteQueens = ((whiteQueens) & (~leftDownMove));
-			uint64_t newBlackQueens = blackQueens;
-
-			promoteToQueen(newBlackPawns, newBlackQueens, leftDownBeat);
-
-			positions.push_back(Board(newWhitePawns, newBlackPawns, newWhiteQueens, newBlackQueens, !currentTurn));
+			positions.push_back((mask | leftDownMove | leftDownBeat));
 		}
 	}
 
 
 	//right down beat
-	uint64_t rightDownMove = (mask << 9);
-	uint64_t rightDownBeat = (rightDownMove << 9);
+	uint32_t rightDownMove = SHIFTDOWN(mask, 4);
+	uint32_t rightDownBeat = SHIFTDOWN(rightDownMove, 4);
 
 	if (currentTurn == WHITE)
 	{
@@ -527,14 +412,7 @@ void Board::generatePawnBeatMoves(uint64_t mask, DeviceVector<Board>& positions)
 			(rightDownMove & blackFigures) > 0
 			)
 		{
-			uint64_t newWhitePawns = ((whitePawns | rightDownBeat) & (~mask));
-			uint64_t newBlackPawns = ((blackPawns) & (~rightDownMove));
-			uint64_t newBlackQueens = ((blackQueens) & (~rightDownMove));
-			uint64_t newWhiteQueens = whiteQueens;
-
-			promoteToQueen(newWhitePawns, newWhiteQueens, rightDownBeat);
-
-			positions.push_back(Board(newWhitePawns, newBlackPawns, newWhiteQueens, newBlackQueens, !currentTurn));
+			positions.push_back((mask | rightDownMove | rightDownBeat));
 		}
 	}
 	if (currentTurn == BLACK)
@@ -547,21 +425,14 @@ void Board::generatePawnBeatMoves(uint64_t mask, DeviceVector<Board>& positions)
 			(rightDownMove & whiteFigures) > 0
 			)
 		{
-			uint64_t newBlackPawns = ((blackPawns | rightDownBeat) & (~mask));
-			uint64_t newWhitePawns = ((whitePawns) & (~rightDownMove));
-			uint64_t newWhiteQueens = ((whiteQueens) & (~rightDownMove));
-			uint64_t newBlackQueens = blackQueens;
-
-			promoteToQueen(newBlackPawns, newBlackQueens, rightDownBeat);
-
-			positions.push_back(Board(newWhitePawns, newBlackPawns, newWhiteQueens, newBlackQueens, !currentTurn));
+			positions.push_back((mask | rightDownMove | rightDownBeat));
 		}
 	}
 
 
 	//left up beat
-	uint64_t leftUpMove = (mask >> 9);
-	uint64_t leftUpBeat = (leftUpMove >> 9);
+	uint32_t leftUpMove = SHIFTUP(mask, 4);
+	uint32_t leftUpBeat = SHIFTUP(leftUpMove, 4);
 
 	if (currentTurn == WHITE)
 	{
@@ -573,14 +444,7 @@ void Board::generatePawnBeatMoves(uint64_t mask, DeviceVector<Board>& positions)
 			(leftUpMove & blackFigures) > 0
 			)
 		{
-			uint64_t newWhitePawns = ((whitePawns | leftUpBeat) & (~mask));
-			uint64_t newBlackPawns = ((blackPawns) & (~leftUpMove));
-			uint64_t newBlackQueens = ((blackQueens) & (~leftUpMove));
-			uint64_t newWhiteQueens = whiteQueens;
-
-			promoteToQueen(newWhitePawns, newWhiteQueens, leftUpBeat);
-
-			positions.push_back(Board(newWhitePawns, newBlackPawns, newWhiteQueens, newBlackQueens, !currentTurn));
+			positions.push_back((mask | leftUpMove | leftUpBeat));
 		}
 	}
 	if (currentTurn == BLACK)
@@ -593,21 +457,14 @@ void Board::generatePawnBeatMoves(uint64_t mask, DeviceVector<Board>& positions)
 			(leftUpMove & whiteFigures) > 0
 			)
 		{
-			uint64_t newBlackPawns = ((blackPawns | leftUpBeat) & (~mask));
-			uint64_t newWhitePawns = ((whitePawns) & (~leftUpMove));
-			uint64_t newWhiteQueens = ((whiteQueens) & (~leftUpMove));
-			uint64_t newBlackQueens = blackQueens;
-
-			promoteToQueen(newBlackPawns, newBlackQueens, leftUpBeat);
-
-			positions.push_back(Board(newWhitePawns, newBlackPawns, newWhiteQueens, newBlackQueens, !currentTurn));
+			positions.push_back((mask | leftUpMove | leftUpBeat));
 		}
 	}
 
 
 	//right up beat
-	uint64_t rightUpMove = (mask >> 7);
-	uint64_t rightUpBeat = (rightUpMove >> 7);
+	uint32_t rightUpMove = SHIFTUP(mask, 3);
+	uint32_t rightUpBeat = SHIFTUP(rightUpMove, 3);
 
 	if (currentTurn == WHITE)
 	{
@@ -619,14 +476,7 @@ void Board::generatePawnBeatMoves(uint64_t mask, DeviceVector<Board>& positions)
 			(rightUpMove & blackFigures) > 0
 			)
 		{
-			uint64_t newWhitePawns = ((whitePawns | rightUpBeat) & (~mask));
-			uint64_t newBlackPawns = ((blackPawns) & (~rightUpMove));
-			uint64_t newBlackQueens = ((blackQueens) & (~rightUpMove));
-			uint64_t newWhiteQueens = whiteQueens;
-
-			promoteToQueen(newWhitePawns, newWhiteQueens, rightUpBeat);
-
-			positions.push_back(Board(newWhitePawns, newBlackPawns, newWhiteQueens, newBlackQueens, !currentTurn));
+			positions.push_back((mask | rightUpMove | rightUpBeat));
 		}
 	}
 	if (currentTurn == BLACK)
@@ -639,27 +489,36 @@ void Board::generatePawnBeatMoves(uint64_t mask, DeviceVector<Board>& positions)
 			(rightUpMove & whiteFigures) > 0
 			)
 		{
-			uint64_t newBlackPawns = ((blackPawns | rightUpBeat) & (~mask));
-			uint64_t newWhitePawns = ((whitePawns) & (~rightUpMove));
-			uint64_t newWhiteQueens = ((whiteQueens) & (~rightUpMove));
-			uint64_t newBlackQueens = blackQueens;
-
-			promoteToQueen(newBlackPawns, newBlackQueens, rightUpBeat);
-
-			positions.push_back(Board(newWhitePawns, newBlackPawns, newWhiteQueens, newBlackQueens, !currentTurn));
+			positions.push_back((mask | rightUpMove | rightUpBeat));
 		}
 	}
 }
 
+__device__ __host__ DeviceVector<uint32_t> generateMoves(Board b)
+{
+	DeviceVector<uint32_t> positions{};
+	uint32_t mask = 1;
+	for (int i = 0; i < 32; i++)
+	{
+		generateFromFigure(mask, positions, b);
+		mask = (mask << 1);
+	}
 
+	return positions;
+}
 
 std::ostream& operator<<(std::ostream& out, Board& board)
 {
-	uint64_t mask = 1;
+	uint32_t mask = 1;
 	for (int i = 0; i < 8; i++)
 	{
-		for (int j = 0; j < 8; j++)
+		for (int j = 0; j < 4; j++)
 		{
+			if (i % 2 == 1)
+			{
+				out << ".";
+			}
+
 			if ((board.whitePawns & mask) > 0)
 			{
 				out << "p";
@@ -676,7 +535,12 @@ std::ostream& operator<<(std::ostream& out, Board& board)
 			{
 				out << "Q";
 			}
-			else {
+			else
+			{
+				out << ".";
+			}
+			if (i % 2 == 0)
+			{
 				out << ".";
 			}
 			mask = (mask << 1);
@@ -686,3 +550,68 @@ std::ostream& operator<<(std::ostream& out, Board& board)
 	}
 	return out;
 }
+
+__host__ bool isTheSameBoard(Board b1, Board b2)
+{
+	return b1.blackPawns == b2.blackPawns && b1.whitePawns == b2.whitePawns && b1.blackQueens == b2.blackQueens && b1.whiteQueens == b2.whiteQueens;
+}
+
+__device__ __host__ Board applyMove(Board board, uint32_t move)
+{
+	Board b;
+	b.currentTurn = (!board.currentTurn);
+	b.whitePawns = board.whitePawns;
+	b.blackPawns = board.blackPawns;
+	b.whiteQueens = board.whiteQueens;
+	b.blackQueens = board.blackQueens;
+	b.lastBeat = (board.lastBeat + 1);
+	uint32_t allFigures = (board.blackPawns | board.blackQueens | board.whitePawns | board.whiteQueens);
+	uint32_t finalMove = ((~allFigures) & move);
+	if (board.currentTurn == WHITE)
+	{
+		if (move & board.whitePawns)
+		{
+			b.whitePawns = ((board.whitePawns & (~move)) | finalMove); 
+		}
+		if (move & board.whiteQueens)
+		{
+			b.whiteQueens = ((board.whiteQueens & (~move)) | finalMove);
+		}
+		b.blackPawns = (board.blackPawns & (~move));
+		b.blackQueens = (board.blackQueens & (~move));
+
+		if (b.blackPawns != board.blackPawns || b.blackQueens != board.blackQueens)
+		{
+			b.lastBeat = 0;
+		}
+	}
+	else
+	{
+		if (move & board.blackPawns)
+		{
+			b.blackPawns = ((board.blackPawns & (~move)) | finalMove);
+		}
+		if (move & board.blackQueens)
+		{
+			b.blackQueens = ((board.blackQueens & (~move)) | finalMove);
+		}
+		b.whitePawns = (board.whitePawns & (~move));
+		b.whiteQueens = (board.whiteQueens & (~move));
+
+		if (b.whitePawns != board.whitePawns || b.whiteQueens != board.whiteQueens)
+		{
+			b.lastBeat = 0;
+		}
+	}
+	b.whiteQueens = (b.whiteQueens | (b.whitePawns & lowerBorder));
+	b.blackQueens = (b.blackQueens | (b.blackPawns & upperBorder));
+	b.whitePawns = (b.whitePawns & (~lowerBorder));
+	b.blackPawns = (b.blackPawns & (~upperBorder));
+
+	return b;
+}
+
+//__device__ __host__ uint32_t shift(uint32_t mask, int amount)
+//{
+//	return (mask & additionalShiftMask) > 0 ? (mask << (amount + 1)) : (mask << amount);
+//}

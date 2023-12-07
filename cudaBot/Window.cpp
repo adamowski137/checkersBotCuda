@@ -3,6 +3,7 @@
 
 Window::Window(std::condition_variable& cv) : HEIGHT{ 800 }, WIDTH{ 800 }, cv{cv}
 {
+    board = createBoard();
     quit = false;
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
@@ -134,30 +135,33 @@ void Window::updateBoard(Board board)
     SDL_LockMutex(mutex);
     SDL_SetRenderTarget(renderer, figuresTexture);
     SDL_RenderClear(renderer);
-    for (int i = 0; i < 64; i++)
+    for (int i = 0; i < 8; i++)
     {
-        SDL_Rect rect;
-        rect.h = height;
-        rect.w = width;
-        rect.x = width * (i % 8);
-        rect.y = height * (i / 8);
-        if ((mask & board.blackPawns) > 0)
+        for (int j = 0; j < 4; j++)
         {
-            SDL_RenderCopy(renderer, blackPawn, NULL, &rect);
+            SDL_Rect rect;
+            rect.h = height;
+            rect.w = width;
+            rect.x = width * (j * 2 + (i % 2));
+            rect.y = height * (i);
+            if ((mask & board.blackPawns) > 0)
+            {
+                SDL_RenderCopy(renderer, blackPawn, NULL, &rect);
+            }
+            if ((mask & board.whitePawns) > 0)
+            {
+                SDL_RenderCopy(renderer, whitePawn, NULL, &rect);
+            }
+            if ((mask & board.blackQueens) > 0)
+            {
+                SDL_RenderCopy(renderer, blackQueen, NULL, &rect);
+            }
+            if ((mask & board.whiteQueens) > 0)
+            {
+                SDL_RenderCopy(renderer, whiteQueen, NULL, &rect);
+            }
+            mask = (mask << 1);            
         }
-        if ((mask & board.whitePawns) > 0)
-        {
-            SDL_RenderCopy(renderer, whitePawn, NULL, &rect);
-        }
-        if ((mask & board.blackQueens) > 0)
-        {
-            SDL_RenderCopy(renderer, blackQueen, NULL, &rect);
-        }
-        if ((mask & board.whiteQueens) > 0)
-        {
-            SDL_RenderCopy(renderer, whiteQueen, NULL, &rect);
-        }
-        mask = (mask << 1);
     }
     SDL_UnlockMutex(mutex);
 }
@@ -168,13 +172,18 @@ void Window::handleClick(int x, int y)
     int squareHeight = HEIGHT / 8;
     int squareWidth = WIDTH / 8;
 
-    int selected =  (y / squareHeight) * 8 + (x / squareWidth);
-    uint64_t mask = ((uint64_t)1<< selected);
-    
-
     SDL_SetRenderTarget(renderer, availableMovesTexture);
     SDL_RenderClear(renderer);
 
+    int selectedY = (y / squareHeight);
+    int selectedX = (x / squareWidth);
+    if ((selectedX + selectedY) % 2 == 1)
+    {
+        selectedFigure = 0;
+        return;
+    }
+
+    uint32_t mask = ((uint32_t)1<< (selectedY * 4 + selectedX / 2));
 
     if(selectedFigure == 0)
     {
@@ -201,30 +210,35 @@ void Window::handleClick(int x, int y)
             rect.w = squareWidth;
             rect.h = squareHeight;
             SDL_RenderCopy(renderer, specialTile, NULL, &rect);
-            DeviceVector<Board> moves;
-            board.generateFromFigure(mask, moves);
+            DeviceVector<uint32_t> moves;
+            generateFromFigure(mask, moves, board);
 
-            uint64_t availableMask = 0;
+            uint32_t availableMask = 0;
             for (int i = 0; i < moves.size(); i++)
             {
-                availableMask = (availableMask | moves[i].blackPawns | moves[i].whitePawns | moves[i].blackQueens | moves[i].whiteQueens);
+                availableMask = (availableMask | moves[i]);
             }
 
-            uint64_t current = (board.blackPawns | board.whitePawns | board.blackQueens | board.whiteQueens);
+            uint32_t current = (board.blackPawns | board.whitePawns | board.blackQueens | board.whiteQueens);
 
-            uint64_t tmp = 1;
-            for (int i = 0; i < 64; i++)
+            availableMask = (availableMask & (~current));
+
+            uint32_t tmp = 1;
+            for (int i = 0; i < 8; i++)
             {
-                if ((current & tmp) == 0 && (availableMask & tmp) > 0)
+                for (int j = 0; j < 4; j++)
                 {
-                    SDL_Rect rect;
-                    rect.h = squareHeight;
-                    rect.w = squareWidth;
-                    rect.x = squareWidth * (i % 8);
-                    rect.y = squareHeight * (i / 8);
-                    SDL_RenderCopy(renderer, specialTile, NULL, &rect);
+                    if ((availableMask & tmp) > 0)
+                    {
+                        SDL_Rect rect;
+                        rect.h = squareHeight;
+                        rect.w = squareWidth;
+                        rect.x = squareWidth * (j * 2 + (i % 2));
+                        rect.y = squareHeight * (i);
+                        SDL_RenderCopy(renderer, specialTile, NULL, &rect);
+                    }
+                    tmp = (tmp << 1);
                 }
-                tmp = (tmp << 1);
             }
 
             return;
@@ -233,15 +247,15 @@ void Window::handleClick(int x, int y)
     else 
     {
 
-        DeviceVector<Board> moves;
+        DeviceVector<uint32_t> moves;
+        uint32_t current = (board.blackPawns | board.whitePawns | board.blackQueens | board.whiteQueens);
 
-        board.generateFromFigure(selectedFigure, moves);
+        generateFromFigure(selectedFigure, moves, board);
         for (int i = 0; i < moves.size(); i++)
         {
-            uint64_t allFigures = (moves[i].blackPawns | moves[i].whitePawns | moves[i].blackQueens | moves[i].whiteQueens);
-            if ((allFigures & mask) > 0)
+            if ((moves[i] & (~current) & mask) > 0)
             {
-                updateBoard(moves[i]);
+                updateBoard(applyMove(board, moves[i]));
                 cv.notify_all();
                 break;
             }

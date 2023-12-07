@@ -23,7 +23,7 @@ private:
 
 	Board board;
 
-	uint64_t selectedFigure;
+	uint32_t selectedFigure;
 	std::condition_variable& cv;
 
 	SDL_Window* window;
