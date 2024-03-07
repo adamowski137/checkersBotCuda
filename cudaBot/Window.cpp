@@ -1,7 +1,7 @@
 #include "Window.hpp"
 #include <iostream>
 
-Window::Window(std::condition_variable& cv) : HEIGHT{ 800 }, WIDTH{ 800 }, cv{cv}
+Window::Window(std::condition_variable& cv) : HEIGHT{ 600 }, WIDTH{ 600 }, cv{cv}
 {
     board = createBoard();
     quit = false;

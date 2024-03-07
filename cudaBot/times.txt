@@ -1,7 +1,7 @@
 select: 0 microseconds
-cuda malloc + memcpy: 105 microseconds
-cuda exec: 29366 microseconds
-cuda cpy + free: 318 microseconds
+cuda malloc + memcpy: 254614 microseconds
+cuda exec: 1615489 microseconds
+cuda cpy + free: 697 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -9,1023 +9,10 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 121 microseconds
-cuda exec: 29859 microseconds
-cuda cpy + free: 401 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 0 microseconds
-cuda malloc + memcpy: 91 microseconds
-cuda exec: 28556 microseconds
-cuda cpy + free: 368 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 86 microseconds
-cuda exec: 28382 microseconds
-cuda cpy + free: 368 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 145 microseconds
-cuda exec: 29640 microseconds
-cuda cpy + free: 349 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 94 microseconds
-cuda exec: 30135 microseconds
-cuda cpy + free: 360 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 0 microseconds
-cuda malloc + memcpy: 138 microseconds
-cuda exec: 28965 microseconds
-cuda cpy + free: 404 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 105 microseconds
-cuda exec: 29438 microseconds
-cuda cpy + free: 366 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 228 microseconds
-cuda exec: 29689 microseconds
-cuda cpy + free: 348 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 152 microseconds
-cuda exec: 28570 microseconds
-cuda cpy + free: 424 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 88 microseconds
-cuda exec: 28802 microseconds
-cuda cpy + free: 386 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 163 microseconds
-cuda exec: 30234 microseconds
-cuda cpy + free: 504 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 80 microseconds
-cuda exec: 29059 microseconds
-cuda cpy + free: 397 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 92 microseconds
-cuda exec: 29987 microseconds
-cuda cpy + free: 441 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 128 microseconds
-cuda exec: 30034 microseconds
-cuda cpy + free: 243 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 90 microseconds
-cuda exec: 29314 microseconds
-cuda cpy + free: 363 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 90 microseconds
-cuda exec: 28925 microseconds
-cuda cpy + free: 324 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 208 microseconds
-cuda exec: 28511 microseconds
-cuda cpy + free: 389 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 106 microseconds
-cuda exec: 28921 microseconds
-cuda cpy + free: 345 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 105 microseconds
-cuda exec: 28722 microseconds
-cuda cpy + free: 397 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 142 microseconds
-cuda exec: 28624 microseconds
-cuda cpy + free: 296 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 76 microseconds
-cuda exec: 28700 microseconds
-cuda cpy + free: 591 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 75 microseconds
-cuda exec: 28015 microseconds
-cuda cpy + free: 301 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 139 microseconds
-cuda exec: 29445 microseconds
-cuda cpy + free: 422 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 13 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 126 microseconds
-cuda exec: 29023 microseconds
-cuda cpy + free: 412 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 104 microseconds
-cuda exec: 29715 microseconds
-cuda cpy + free: 301 microseconds
-backpropagation: 1 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 198 microseconds
-cuda exec: 28203 microseconds
-cuda cpy + free: 328 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 73 microseconds
-cuda exec: 29090 microseconds
-cuda cpy + free: 363 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 105 microseconds
-cuda exec: 28982 microseconds
-cuda cpy + free: 339 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 1 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 115 microseconds
-cuda exec: 28541 microseconds
-cuda cpy + free: 359 microseconds
-backpropagation: 1 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 62 microseconds
-cuda exec: 27916 microseconds
-cuda cpy + free: 449 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 80 microseconds
-cuda exec: 29029 microseconds
-cuda cpy + free: 369 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 69 microseconds
-cuda exec: 29213 microseconds
-cuda cpy + free: 368 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 180 microseconds
-cuda exec: 29445 microseconds
-cuda cpy + free: 392 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 75 microseconds
-cuda exec: 29831 microseconds
-cuda cpy + free: 432 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 13 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 70 microseconds
-cuda exec: 28804 microseconds
-cuda cpy + free: 446 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 42 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 196 microseconds
-cuda exec: 28442 microseconds
-cuda cpy + free: 345 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 129 microseconds
-cuda exec: 28889 microseconds
-cuda cpy + free: 370 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 103 microseconds
-cuda exec: 28950 microseconds
-cuda cpy + free: 394 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 92 microseconds
-cuda exec: 28544 microseconds
-cuda cpy + free: 320 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 106 microseconds
-cuda exec: 29145 microseconds
-cuda cpy + free: 383 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 69 microseconds
-cuda exec: 29504 microseconds
-cuda cpy + free: 406 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 142 microseconds
-cuda exec: 29015 microseconds
-cuda cpy + free: 380 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 111 microseconds
-cuda exec: 30040 microseconds
-cuda cpy + free: 327 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 127 microseconds
-cuda exec: 29298 microseconds
-cuda cpy + free: 346 microseconds
-backpropagation: 0 microseconds
-backpropagation: 13 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 99 microseconds
-cuda exec: 28635 microseconds
-cuda cpy + free: 318 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 3 microseconds
-cuda malloc + memcpy: 75 microseconds
-cuda exec: 28738 microseconds
-cuda cpy + free: 384 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 1 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 73 microseconds
-cuda exec: 29233 microseconds
-cuda cpy + free: 368 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 13 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 96 microseconds
-cuda exec: 29606 microseconds
-cuda cpy + free: 309 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 76 microseconds
-cuda exec: 29911 microseconds
-cuda cpy + free: 399 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 105 microseconds
-cuda exec: 29262 microseconds
-cuda cpy + free: 320 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 97 microseconds
-cuda exec: 28907 microseconds
-cuda cpy + free: 361 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 89 microseconds
-cuda exec: 28667 microseconds
-cuda cpy + free: 630 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 121 microseconds
-cuda exec: 29242 microseconds
-cuda cpy + free: 412 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 80 microseconds
-cuda exec: 29283 microseconds
-cuda cpy + free: 374 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 92 microseconds
-cuda exec: 28111 microseconds
-cuda cpy + free: 309 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 108 microseconds
-cuda exec: 28985 microseconds
-cuda cpy + free: 443 microseconds
-backpropagation: 1 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 16 microseconds
-cuda malloc + memcpy: 94 microseconds
-cuda exec: 28463 microseconds
-cuda cpy + free: 325 microseconds
-backpropagation: 0 microseconds
-backpropagation: 1 microseconds
-backpropagation: 0 microseconds
-backpropagation: 1 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 177 microseconds
-cuda exec: 28908 microseconds
-cuda cpy + free: 429 microseconds
-backpropagation: 1 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 137 microseconds
-cuda exec: 29213 microseconds
-cuda cpy + free: 383 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 118 microseconds
-cuda exec: 28876 microseconds
-cuda cpy + free: 375 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 77 microseconds
-cuda exec: 29246 microseconds
-cuda cpy + free: 357 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 13 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 71 microseconds
-cuda exec: 29214 microseconds
-cuda cpy + free: 353 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 133 microseconds
-cuda exec: 29774 microseconds
-cuda cpy + free: 486 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 84 microseconds
-cuda exec: 28811 microseconds
-cuda cpy + free: 426 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 3 microseconds
-cuda malloc + memcpy: 108 microseconds
-cuda exec: 28360 microseconds
-cuda cpy + free: 329 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 71 microseconds
-cuda exec: 29122 microseconds
-cuda cpy + free: 398 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 14 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 68 microseconds
-cuda exec: 29381 microseconds
-cuda cpy + free: 394 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 3 microseconds
-cuda malloc + memcpy: 99 microseconds
-cuda exec: 28442 microseconds
-cuda cpy + free: 374 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 74 microseconds
-cuda exec: 28890 microseconds
-cuda cpy + free: 333 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 92 microseconds
-cuda exec: 28611 microseconds
-cuda cpy + free: 292 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 78 microseconds
-cuda exec: 28714 microseconds
-cuda cpy + free: 381 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 101 microseconds
-cuda exec: 29736 microseconds
-cuda cpy + free: 578 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 4 microseconds
-cuda malloc + memcpy: 128 microseconds
-cuda exec: 29310 microseconds
-cuda cpy + free: 433 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 15 microseconds
-cuda malloc + memcpy: 123 microseconds
-cuda exec: 29568 microseconds
-cuda cpy + free: 412 microseconds
-backpropagation: 0 microseconds
-backpropagation: 8 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 99 microseconds
-cuda exec: 28740 microseconds
-cuda cpy + free: 446 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 85 microseconds
-cuda exec: 28740 microseconds
-cuda cpy + free: 413 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 13 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 95 microseconds
-cuda exec: 28866 microseconds
-cuda cpy + free: 385 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 122 microseconds
-cuda exec: 30557 microseconds
-cuda cpy + free: 340 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 143 microseconds
-cuda exec: 28846 microseconds
-cuda cpy + free: 353 microseconds
-backpropagation: 1 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 219 microseconds
-cuda exec: 29562 microseconds
-cuda cpy + free: 373 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 103 microseconds
-cuda exec: 28965 microseconds
-cuda cpy + free: 346 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
+select: 450 microseconds
 cuda malloc + memcpy: 79 microseconds
-cuda exec: 28600 microseconds
-cuda cpy + free: 435 microseconds
-backpropagation: 1 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 3 microseconds
-cuda malloc + memcpy: 103 microseconds
-cuda exec: 30650 microseconds
-cuda cpy + free: 375 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 100 microseconds
-cuda exec: 29980 microseconds
-cuda cpy + free: 354 microseconds
-backpropagation: 1 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 66 microseconds
-cuda exec: 29092 microseconds
-cuda cpy + free: 385 microseconds
-backpropagation: 0 microseconds
+cuda exec: 1488309 microseconds
+cuda cpy + free: 150 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1034,9 +21,31 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 select: 4 microseconds
+cuda malloc + memcpy: 84 microseconds
+cuda exec: 1565100 microseconds
+cuda cpy + free: 146 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 4 microseconds
+cuda malloc + memcpy: 84 microseconds
+cuda exec: 1591239 microseconds
+cuda cpy + free: 137 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 3 microseconds
 cuda malloc + memcpy: 83 microseconds
-cuda exec: 28574 microseconds
-cuda cpy + free: 409 microseconds
+cuda exec: 1586958 microseconds
+cuda cpy + free: 513 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1044,13 +53,10 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 13 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 92 microseconds
-cuda exec: 29286 microseconds
-cuda cpy + free: 331 microseconds
+select: 4 microseconds
+cuda malloc + memcpy: 81 microseconds
+cuda exec: 1635486 microseconds
+cuda cpy + free: 130 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1058,31 +64,31 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 98 microseconds
-cuda exec: 28388 microseconds
-cuda cpy + free: 346 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 122 microseconds
-cuda exec: 29276 microseconds
-cuda cpy + free: 310 microseconds
+select: 3 microseconds
+cuda malloc + memcpy: 126 microseconds
+cuda exec: 1421376 microseconds
+cuda cpy + free: 244 microseconds
 backpropagation: 1 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
 backpropagation: 0 microseconds
+backpropagation: 2 microseconds
+select: 11 microseconds
+cuda malloc + memcpy: 706 microseconds
+cuda exec: 1468804 microseconds
+cuda cpy + free: 1382 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 2 microseconds
 backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 93 microseconds
-cuda exec: 29138 microseconds
+backpropagation: 1 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+select: 17 microseconds
+cuda malloc + memcpy: 951 microseconds
+cuda exec: 1420757 microseconds
 cuda cpy + free: 313 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1091,12 +97,90 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
+select: 13 microseconds
+cuda malloc + memcpy: 2288 microseconds
+cuda exec: 1633602 microseconds
+cuda cpy + free: 2396 microseconds
+backpropagation: 5 microseconds
+backpropagation: 1 microseconds
+backpropagation: 0 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+backpropagation: 0 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+select: 32 microseconds
+cuda malloc + memcpy: 146 microseconds
+cuda exec: 1677583 microseconds
+cuda cpy + free: 765 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+backpropagation: 0 microseconds
+backpropagation: 1 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 112 microseconds
-cuda exec: 29518 microseconds
-cuda cpy + free: 457 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 11 microseconds
+cuda malloc + memcpy: 1725 microseconds
+cuda exec: 1453332 microseconds
+cuda cpy + free: 806 microseconds
+backpropagation: 2 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+select: 13 microseconds
+cuda malloc + memcpy: 722 microseconds
+cuda exec: 1490872 microseconds
+cuda cpy + free: 1379 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 5 microseconds
+select: 24 microseconds
+cuda malloc + memcpy: 823 microseconds
+cuda exec: 1461312 microseconds
+cuda cpy + free: 935 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 4 microseconds
+cuda malloc + memcpy: 325 microseconds
+cuda exec: 1496579 microseconds
+cuda cpy + free: 751 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 15 microseconds
+cuda malloc + memcpy: 990 microseconds
+cuda exec: 1451222 microseconds
+cuda cpy + free: 1976 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 3 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+select: 14 microseconds
+cuda malloc + memcpy: 1188 microseconds
+cuda exec: 1447010 microseconds
+cuda cpy + free: 111 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1106,97 +190,9 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 select: 2 microseconds
-cuda malloc + memcpy: 136 microseconds
-cuda exec: 28763 microseconds
-cuda cpy + free: 505 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 1 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 111 microseconds
-cuda exec: 29243 microseconds
-cuda cpy + free: 447 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 3 microseconds
-cuda malloc + memcpy: 107 microseconds
-cuda exec: 28818 microseconds
-cuda cpy + free: 345 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 86 microseconds
-cuda exec: 29617 microseconds
-cuda cpy + free: 379 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 143 microseconds
-cuda exec: 28724 microseconds
-cuda cpy + free: 523 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 128 microseconds
-cuda exec: 29480 microseconds
-cuda cpy + free: 378 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 1 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 3 microseconds
-cuda malloc + memcpy: 110 microseconds
-cuda exec: 29467 microseconds
-cuda cpy + free: 316 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 13 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 92 microseconds
-cuda exec: 28488 microseconds
-cuda cpy + free: 304 microseconds
-backpropagation: 1 microseconds
-backpropagation: 1 microseconds
+cuda malloc + memcpy: 403 microseconds
+cuda exec: 1663875 microseconds
+cuda cpy + free: 163 microseconds
 backpropagation: 2 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1204,10 +200,10 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 77 microseconds
-cuda exec: 28155 microseconds
-cuda cpy + free: 302 microseconds
+select: 4 microseconds
+cuda malloc + memcpy: 117 microseconds
+cuda exec: 1777529 microseconds
+cuda cpy + free: 124 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1216,10 +212,10 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 83 microseconds
-cuda exec: 29051 microseconds
-cuda cpy + free: 433 microseconds
+select: 4 microseconds
+cuda malloc + memcpy: 460 microseconds
+cuda exec: 1636108 microseconds
+cuda cpy + free: 129 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1228,36 +224,10 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 113 microseconds
-cuda exec: 29942 microseconds
-cuda cpy + free: 385 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 1 microseconds
-backpropagation: 1 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 3 microseconds
-cuda malloc + memcpy: 88 microseconds
-cuda exec: 28466 microseconds
-cuda cpy + free: 362 microseconds
-backpropagation: 1 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 90 microseconds
-cuda exec: 29027 microseconds
-cuda cpy + free: 332 microseconds
+select: 6 microseconds
+cuda malloc + memcpy: 402 microseconds
+cuda exec: 1598014 microseconds
+cuda cpy + free: 100 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1266,28 +236,10 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 3 microseconds
-cuda malloc + memcpy: 112 microseconds
-cuda exec: 28601 microseconds
-cuda cpy + free: 361 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 86 microseconds
-cuda exec: 30474 microseconds
-cuda cpy + free: 308 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
+select: 6 microseconds
+cuda malloc + memcpy: 89 microseconds
+cuda exec: 1736791 microseconds
+cuda cpy + free: 86 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1297,114 +249,9 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 select: 2 microseconds
-cuda malloc + memcpy: 207 microseconds
-cuda exec: 29796 microseconds
-cuda cpy + free: 393 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 129 microseconds
-cuda exec: 29909 microseconds
-cuda cpy + free: 391 microseconds
-backpropagation: 0 microseconds
-backpropagation: 1 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 3 microseconds
-cuda malloc + memcpy: 120 microseconds
-cuda exec: 28782 microseconds
-cuda cpy + free: 438 microseconds
-backpropagation: 15 microseconds
-backpropagation: 0 microseconds
-backpropagation: 14 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 102 microseconds
-cuda exec: 30692 microseconds
-cuda cpy + free: 720 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 128 microseconds
-cuda exec: 29409 microseconds
-cuda cpy + free: 318 microseconds
-backpropagation: 0 microseconds
-backpropagation: 15 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 140 microseconds
-cuda exec: 30514 microseconds
-cuda cpy + free: 346 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 69 microseconds
-cuda exec: 29750 microseconds
-cuda cpy + free: 332 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 79 microseconds
-cuda exec: 29451 microseconds
-cuda cpy + free: 429 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 98 microseconds
-cuda exec: 29344 microseconds
-cuda cpy + free: 317 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 71 microseconds
-cuda exec: 29346 microseconds
-cuda cpy + free: 375 microseconds
+cuda malloc + memcpy: 468 microseconds
+cuda exec: 1583093 microseconds
+cuda cpy + free: 399 microseconds
 backpropagation: 1 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1413,23 +260,11 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 98 microseconds
-cuda exec: 31545 microseconds
-cuda cpy + free: 379 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
 select: 2 microseconds
-cuda malloc + memcpy: 114 microseconds
-cuda exec: 29192 microseconds
-cuda cpy + free: 397 microseconds
+cuda malloc + memcpy: 340 microseconds
+cuda exec: 1670158 microseconds
+cuda cpy + free: 637 microseconds
+backpropagation: 1 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1437,22 +272,9 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 1 microseconds
-cuda malloc + memcpy: 83 microseconds
-cuda exec: 30415 microseconds
-cuda cpy + free: 322 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 3 microseconds
-cuda malloc + memcpy: 105 microseconds
-cuda exec: 29351 microseconds
+select: 4 microseconds
+cuda malloc + memcpy: 629 microseconds
+cuda exec: 1651434 microseconds
 cuda cpy + free: 371 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1461,10 +283,12 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
-select: 2 microseconds
-cuda malloc + memcpy: 79 microseconds
-cuda exec: 29757 microseconds
-cuda cpy + free: 403 microseconds
+backpropagation: 0 microseconds
+select: 4 microseconds
+cuda malloc + memcpy: 431 microseconds
+cuda exec: 1605007 microseconds
+cuda cpy + free: 147 microseconds
+backpropagation: 1 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1472,24 +296,10 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 3 microseconds
-cuda malloc + memcpy: 110 microseconds
-cuda exec: 29807 microseconds
-cuda cpy + free: 405 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 3 microseconds
-cuda malloc + memcpy: 86 microseconds
-cuda exec: 29086 microseconds
-cuda cpy + free: 315 microseconds
-backpropagation: 0 microseconds
+select: 8 microseconds
+cuda malloc + memcpy: 54 microseconds
+cuda exec: 1600642 microseconds
+cuda cpy + free: 155 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1499,21 +309,21 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 select: 2 microseconds
-cuda malloc + memcpy: 99 microseconds
-cuda exec: 29140 microseconds
-cuda cpy + free: 329 microseconds
+cuda malloc + memcpy: 409 microseconds
+cuda exec: 1601803 microseconds
+cuda cpy + free: 701 microseconds
+backpropagation: 2 microseconds
+backpropagation: 3 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-backpropagation: 0 microseconds
-select: 14 microseconds
-cuda malloc + memcpy: 68 microseconds
-cuda exec: 29470 microseconds
-cuda cpy + free: 322 microseconds
-backpropagation: 0 microseconds
+backpropagation: 1 microseconds
+select: 9 microseconds
+cuda malloc + memcpy: 503 microseconds
+cuda exec: 1419697 microseconds
+cuda cpy + free: 153 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1523,9 +333,164 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 select: 2 microseconds
+cuda malloc + memcpy: 235 microseconds
+cuda exec: 1581226 microseconds
+cuda cpy + free: 1354 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+backpropagation: 3 microseconds
+backpropagation: 2 microseconds
+backpropagation: 2 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+select: 11 microseconds
+cuda malloc + memcpy: 638 microseconds
+cuda exec: 1625440 microseconds
+cuda cpy + free: 483 microseconds
+backpropagation: 2 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 15 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 6 microseconds
 cuda malloc + memcpy: 100 microseconds
-cuda exec: 29637 microseconds
-cuda cpy + free: 329 microseconds
+cuda exec: 1652171 microseconds
+cuda cpy + free: 128 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 4 microseconds
+cuda malloc + memcpy: 103 microseconds
+cuda exec: 1635360 microseconds
+cuda cpy + free: 143 microseconds
+backpropagation: 2 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 6 microseconds
+cuda malloc + memcpy: 61 microseconds
+cuda exec: 1592643 microseconds
+cuda cpy + free: 631 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 12 microseconds
+cuda malloc + memcpy: 902 microseconds
+cuda exec: 1531038 microseconds
+cuda cpy + free: 481 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 1 microseconds
+select: 5 microseconds
+cuda malloc + memcpy: 86 microseconds
+cuda exec: 1617354 microseconds
+cuda cpy + free: 789 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 0 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+select: 11 microseconds
+cuda malloc + memcpy: 650 microseconds
+cuda exec: 1658617 microseconds
+cuda cpy + free: 160 microseconds
+backpropagation: 1 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 3 microseconds
+cuda malloc + memcpy: 84 microseconds
+cuda exec: 1611699 microseconds
+cuda cpy + free: 123 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 6 microseconds
+cuda malloc + memcpy: 112 microseconds
+cuda exec: 1672971 microseconds
+cuda cpy + free: 147 microseconds
+backpropagation: 2 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 6 microseconds
+cuda malloc + memcpy: 588 microseconds
+cuda exec: 1659585 microseconds
+cuda cpy + free: 113 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 1 microseconds
+cuda malloc + memcpy: 533 microseconds
+cuda exec: 1643934 microseconds
+cuda cpy + free: 885 microseconds
+backpropagation: 5 microseconds
+backpropagation: 1 microseconds
+backpropagation: 3 microseconds
+backpropagation: 1 microseconds
+backpropagation: 2 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+select: 12 microseconds
+cuda malloc + memcpy: 614 microseconds
+cuda exec: 1603532 microseconds
+cuda cpy + free: 130 microseconds
+backpropagation: 3 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 5 microseconds
+cuda malloc + memcpy: 78 microseconds
+cuda exec: 1631410 microseconds
+cuda cpy + free: 1034 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1535,9 +500,76 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 select: 2 microseconds
-cuda malloc + memcpy: 143 microseconds
-cuda exec: 29944 microseconds
-cuda cpy + free: 375 microseconds
+cuda malloc + memcpy: 77 microseconds
+cuda exec: 1603023 microseconds
+cuda cpy + free: 560 microseconds
+backpropagation: 2 microseconds
+backpropagation: 0 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 8 microseconds
+cuda malloc + memcpy: 456 microseconds
+cuda exec: 1586817 microseconds
+cuda cpy + free: 140 microseconds
+backpropagation: 1 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 5 microseconds
+cuda malloc + memcpy: 162 microseconds
+cuda exec: 1570385 microseconds
+cuda cpy + free: 901 microseconds
+backpropagation: 3 microseconds
+backpropagation: 1 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+backpropagation: 3 microseconds
+backpropagation: 3 microseconds
+select: 18 microseconds
+cuda malloc + memcpy: 506 microseconds
+cuda exec: 1586402 microseconds
+cuda cpy + free: 125 microseconds
+backpropagation: 0 microseconds
+backpropagation: 15 microseconds
+backpropagation: 0 microseconds
+backpropagation: 1 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 6 microseconds
+cuda malloc + memcpy: 100 microseconds
+cuda exec: 1659638 microseconds
+cuda cpy + free: 571 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 16 microseconds
+select: 7 microseconds
+cuda malloc + memcpy: 123 microseconds
+cuda exec: 1643337 microseconds
+cuda cpy + free: 880 microseconds
+backpropagation: 3 microseconds
+backpropagation: 1 microseconds
+backpropagation: 0 microseconds
+backpropagation: 2 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+select: 27 microseconds
+cuda malloc + memcpy: 742 microseconds
+cuda exec: 1597552 microseconds
+cuda cpy + free: 133 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
@@ -1546,3 +578,351 @@ backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
 backpropagation: 0 microseconds
+select: 6 microseconds
+cuda malloc + memcpy: 112 microseconds
+cuda exec: 1661267 microseconds
+cuda cpy + free: 482 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 6 microseconds
+cuda malloc + memcpy: 136 microseconds
+cuda exec: 1620710 microseconds
+cuda cpy + free: 139 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 2 microseconds
+cuda malloc + memcpy: 512 microseconds
+cuda exec: 1661320 microseconds
+cuda cpy + free: 108 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 5 microseconds
+cuda malloc + memcpy: 95 microseconds
+cuda exec: 1605268 microseconds
+cuda cpy + free: 133 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 6 microseconds
+cuda malloc + memcpy: 182 microseconds
+cuda exec: 1640734 microseconds
+cuda cpy + free: 689 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 1 microseconds
+backpropagation: 2 microseconds
+backpropagation: 2 microseconds
+select: 18 microseconds
+cuda malloc + memcpy: 683 microseconds
+cuda exec: 1656994 microseconds
+cuda cpy + free: 419 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 2 microseconds
+cuda malloc + memcpy: 335 microseconds
+cuda exec: 1612272 microseconds
+cuda cpy + free: 263 microseconds
+backpropagation: 3 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 1 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 3 microseconds
+cuda malloc + memcpy: 477 microseconds
+cuda exec: 1646056 microseconds
+cuda cpy + free: 116 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 2 microseconds
+cuda malloc + memcpy: 517 microseconds
+cuda exec: 1504692 microseconds
+cuda cpy + free: 533 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 3 microseconds
+cuda malloc + memcpy: 163 microseconds
+cuda exec: 1524564 microseconds
+cuda cpy + free: 721 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 1 microseconds
+backpropagation: 0 microseconds
+backpropagation: 1 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 13 microseconds
+cuda malloc + memcpy: 583 microseconds
+cuda exec: 1556594 microseconds
+cuda cpy + free: 158 microseconds
+backpropagation: 2 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 10 microseconds
+cuda malloc + memcpy: 640 microseconds
+cuda exec: 1623909 microseconds
+cuda cpy + free: 109 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 2 microseconds
+cuda malloc + memcpy: 528 microseconds
+cuda exec: 1615825 microseconds
+cuda cpy + free: 271 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 1 microseconds
+cuda malloc + memcpy: 306 microseconds
+cuda exec: 1613182 microseconds
+cuda cpy + free: 109 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 12 microseconds
+cuda malloc + memcpy: 117 microseconds
+cuda exec: 1631577 microseconds
+cuda cpy + free: 110 microseconds
+backpropagation: 2 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 10 microseconds
+cuda malloc + memcpy: 104 microseconds
+cuda exec: 1569108 microseconds
+cuda cpy + free: 603 microseconds
+backpropagation: 3 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+select: 59 microseconds
+cuda malloc + memcpy: 1333 microseconds
+cuda exec: 1445523 microseconds
+cuda cpy + free: 2016 microseconds
+backpropagation: 3 microseconds
+backpropagation: 6 microseconds
+backpropagation: 1 microseconds
+backpropagation: 245 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+select: 31 microseconds
+cuda malloc + memcpy: 1990 microseconds
+cuda exec: 1447453 microseconds
+cuda cpy + free: 1242 microseconds
+backpropagation: 3 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+backpropagation: 3 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+select: 14 microseconds
+cuda malloc + memcpy: 797 microseconds
+cuda exec: 1575057 microseconds
+cuda cpy + free: 1036 microseconds
+backpropagation: 3 microseconds
+backpropagation: 3 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+backpropagation: 2 microseconds
+backpropagation: 3 microseconds
+backpropagation: 1 microseconds
+backpropagation: 2 microseconds
+select: 19 microseconds
+cuda malloc + memcpy: 824 microseconds
+cuda exec: 1568579 microseconds
+cuda cpy + free: 430 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 18 microseconds
+cuda malloc + memcpy: 145 microseconds
+cuda exec: 1565473 microseconds
+cuda cpy + free: 125 microseconds
+backpropagation: 3 microseconds
+backpropagation: 1 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 8 microseconds
+cuda malloc + memcpy: 72 microseconds
+cuda exec: 1585032 microseconds
+cuda cpy + free: 318 microseconds
+backpropagation: 14 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 51 microseconds
+cuda malloc + memcpy: 642 microseconds
+cuda exec: 1651069 microseconds
+cuda cpy + free: 275 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 2 microseconds
+cuda malloc + memcpy: 389 microseconds
+cuda exec: 1656370 microseconds
+cuda cpy + free: 1435 microseconds
+backpropagation: 3 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 1 microseconds
+backpropagation: 1 microseconds
+select: 14 microseconds
+cuda malloc + memcpy: 624 microseconds
+cuda exec: 1522805 microseconds
+cuda cpy + free: 1642 microseconds
+backpropagation: 1 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 5 microseconds
+cuda malloc + memcpy: 165 microseconds
+cuda exec: 1695202 microseconds
+cuda cpy + free: 913 microseconds
+backpropagation: 3 microseconds
+backpropagation: 3 microseconds
+backpropagation: 1 microseconds
+backpropagation: 2 microseconds
+backpropagation: 1 microseconds
+backpropagation: 3 microseconds
+backpropagation: 2 microseconds
+select: 12 microseconds
+cuda malloc + memcpy: 744 microseconds
+cuda exec: 1617907 microseconds
+cuda cpy + free: 900 microseconds
+backpropagation: 2 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 3 microseconds
+cuda malloc + memcpy: 372 microseconds
+cuda exec: 1342739 microseconds
+cuda cpy + free: 109 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 3 microseconds
+cuda malloc + memcpy: 53 microseconds
+cuda exec: 1185711 microseconds
+cuda cpy + free: 244 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 2 microseconds
+cuda malloc + memcpy: 96 microseconds
+cuda exec: 1204237 microseconds
+cuda cpy + free: 212 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+backpropagation: 0 microseconds
+select: 3 microseconds
+cuda malloc + memcpy: 81 microseconds
